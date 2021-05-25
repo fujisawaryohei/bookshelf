@@ -2,6 +2,8 @@ require 'hanami/interactor'
 
 module BookInteractor
   class Index
+    # RubyでDIPの効果（下位レイヤーの実装に依存しない）を得るためには
+    # Duck TypingとDIを用いる
     def initialize(repository = BookRepository.new)
       @repository = repository
     end
