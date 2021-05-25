@@ -5,7 +5,9 @@ module Web::Controllers::Books
     expose :books
 
     def call(params)
-      @books = BookInteractor::Index.new(BookRepository.new).call
+      # Controllerの責務は入力を受け取りアプリケーションにとって適切な形に変換して渡す事
+      # アプリケーション固有のビジネルロジックはUseCaseInteractorに委譲
+      @books = BookInteractor::Index.new.call(params)
     end
   end
 end
