@@ -9,7 +9,8 @@ module BookInteractor
     end
     
     def call(book_params)
-      repository.create(book_params)
+      book = Book.new(book_params)
+      repository.create(book)
     end
   end
 end
