@@ -11,7 +11,7 @@ module Web::Controllers::Books
         @book = interactor.book
         redirect_to '/books'
       else
-        @error_message = interactor.error
+        @error_message = interactor.error_message
         self.status = 422
       end
     end
