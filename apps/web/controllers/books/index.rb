@@ -9,7 +9,7 @@ module Web::Controllers::Books
       # 場合によっては変換処理をControllerで行い、InputDataをDTOとして渡して
       # オブジェクト化してUseCase Interactorに渡す。
 
-      # アプリケーション固有のビジネルロジックはUseCaseInteractorに委譲
+      # アプリケーション固有のビジネスロジックはUseCaseInteractorに委譲
       @books = BookInteractor::Index.new.call(params)
     end
   end
