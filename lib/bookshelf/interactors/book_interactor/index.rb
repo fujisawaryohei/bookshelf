@@ -2,6 +2,7 @@ require 'hanami/interactor'
 
 module BookInteractor
   class Index
+    attr_reader :repository
     # RubyでDIPの効果（下位レイヤーの実装に依存しない）を得るためには
     # Duck TypingとDIを用いる
     def initialize(repository = BookRepository.new)
@@ -11,7 +12,7 @@ module BookInteractor
     def call(input)
       # UseCaseの責務はあくまでアプリケーション固有のビジネルルールを定義, 実装すること
       # 永続化処理はRepositoryに委譲
-      @repository.all
+      repository.all
     end
   end
 end
