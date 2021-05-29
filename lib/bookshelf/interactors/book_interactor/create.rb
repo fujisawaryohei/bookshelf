@@ -20,12 +20,13 @@ module BookInteractor
 
     private
 
+    # 参考: https://www.rubydoc.info/gems/hanami-utils/Hanami/Interactor/LegacyInterface
     # valid?はHanami::Interactorをincludeするとcall呼び出し前に実行するフックメソッド
     # valid? を実行する
     # valid? の戻り値が真値であれば、クラスに定義された #call を実行する
     # valid? の戻り地が偽値であれば、何もしない
     # Hanami::Interactor::Result のインスタンスにexpose メソッドで指定したインスタンス変数を Dependency Injection する
-    # Hanami::Interactor::Result のインスタンスを返す
+    # callでHanami::Interactor::Result のインスタンスを返す
     def valid?
       validate_result = Validations::Create.new(params).validate 
       if validate_result.failure?
