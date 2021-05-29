@@ -2,10 +2,18 @@ module Web::Controllers::Books
   class Create
     include Web::Action
 
-    def call(params)
-      BookInteractor::Create.new.call(params[:book])
+    expose :book
+    expose :error_message
 
-      redirect_to '/books'
+    def call(params)
+      interactor = BookInteractor::Create.new(params[:book]).call
+      if interactor.success?
+        @book = interactor.book
+        redirect_to '/books'
+      else
+        @error_message = interactor.error
+        self.status = 422
+      end
     end
   end
 end

@@ -193,6 +193,7 @@ DEPENDENCIES
   hanami (~> 1.3)
   hanami-model (~> 1.3)
   hanami-utils
+  hanami-validations
   hanami-webconsole
   pg
   pry-byebug
