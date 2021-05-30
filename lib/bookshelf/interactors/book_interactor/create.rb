@@ -6,8 +6,7 @@ module BookInteractor
 
     attr_reader :params
     attr_reader :repository
-    expose :book
-    expose :error_message
+    expose :book, :error_messages
     
     def initialize(params, repository = BookRepository.new)
       @params = params
@@ -30,7 +29,7 @@ module BookInteractor
     def valid?
       validate_result = Validations::Create.new(params).validate 
       if validate_result.failure?
-        @error_message = validate_result.messages
+        @error_messages = validate_result.messages
       end
 
       validate_result.success?
