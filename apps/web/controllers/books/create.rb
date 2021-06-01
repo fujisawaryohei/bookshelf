@@ -2,16 +2,21 @@ module Web::Controllers::Books
   class Create
     include Web::Action
 
-    # Presenterの役割であるViewsに渡している
-    expose :book, :errors
+    attr_reader :interactor
+
+    expose :errors
+
+    def initialize(interactor = BookInteractor::Create.new)
+      @interactor = interactor
+    end
 
     def call(params)
-      interactor = BookInteractor::Create.new(params[:book]).call
-      if interactor.success?
-        @book = interactor.book
+      interactor_result = interactor.call(params[:book])
+      if interactor_result.success?
+        @book = interactor_result.book
         redirect_to '/books'
       else
-        @errors = interactor.error_messages
+        @errors = interactor_result.error_messages
         self.status = 422
       end
     end

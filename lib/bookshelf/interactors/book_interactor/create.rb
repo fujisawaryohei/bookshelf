@@ -8,12 +8,11 @@ module BookInteractor
     attr_reader :repository
     expose :book, :error_messages
     
-    def initialize(params, repository = BookRepository.new)
-      @params = params
+    def initialize(repository = BookRepository.new)
       @repository = repository
     end
     
-    def call
+    def call(params)
       @book = repository.create(Book.new(params))
     end
 
@@ -26,8 +25,8 @@ module BookInteractor
     # valid? の戻り地が偽値であれば、何もしない
     # Hanami::Interactor::Result のインスタンスにexpose メソッドで指定したインスタンス変数を Dependency Injection する
     # callでHanami::Interactor::Result のインスタンスを返す
-    def valid?
-      validate_result = Validations::Create.new(params).validate 
+    def valid?(params)
+      validate_result = Validations::Create.new(params).validate
       if validate_result.failure?
         @error_messages = validate_result.messages
       end
