@@ -9,7 +9,7 @@ module BookInteractor
       @repository = repository
     end
 
-    def call(input)
+    def call
       # UseCaseの責務はあくまでアプリケーション固有のビジネルルールを定義, 実装すること
       # 永続化処理はRepositoryに委譲
       repository.all
