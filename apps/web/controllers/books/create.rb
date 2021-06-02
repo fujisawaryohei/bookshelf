@@ -6,7 +6,7 @@ module Web::Controllers::Books
 
     expose :book, :errors
 
-    def initialize(interactor = BookInteractor::Create.new)
+    def initialize(interactor = BookInteractor::AddBook.new)
       @interactor = interactor
     end
 

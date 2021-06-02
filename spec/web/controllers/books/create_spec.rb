@@ -4,7 +4,7 @@ RSpec.describe Web::Controllers::Books::Create, type: :action do
   # Repositoryのモックオブジェクトを生成
   let(:repository) { double('repository', create: book) }
   # RepositoryのモックオブジェクトをInteractorにスタブする
-  let(:interactor) { BookInteractor::Create.new(repository) }
+  let(:interactor) { BookInteractor::AddBook.new(repository) }
   # スタブしたInteractorをControllerにDI
   let(:action) { described_class.new(interactor) }
 

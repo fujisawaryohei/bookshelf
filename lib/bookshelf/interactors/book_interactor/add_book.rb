@@ -1,7 +1,7 @@
 require 'hanami/interactor'
 
 module BookInteractor
-  class Create
+  class AddBook
     include Hanami::Interactor
 
     attr_reader :params

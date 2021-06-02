@@ -6,7 +6,7 @@ module Web::Controllers::Books
 
     expose :books
 
-    def initialize(interactor = BookInteractor::Index.new)
+    def initialize(interactor = BookInteractor::BookList.new)
       @interactor = interactor
     end
 

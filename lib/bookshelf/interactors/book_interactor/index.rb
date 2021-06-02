@@ -1,7 +1,7 @@
 require 'hanami/interactor'
 
 module BookInteractor
-  class Index
+  class BookList
     attr_reader :repository
     # RubyでDIPの効果（下位レイヤーの実装に依存しない）を得るためには
     # Duck TypingとDIを用いる
