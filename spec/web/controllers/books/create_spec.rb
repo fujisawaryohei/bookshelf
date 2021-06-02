@@ -2,7 +2,7 @@ RSpec.describe Web::Controllers::Books::Create, type: :action do
   # フェイクオブジェクトを生成
   let(:book) { Book.new(title: 'Confident Ruby', author: 'Avdi Grimm')}
   # Repositoryのモックオブジェクトを生成
-  let(:repository) { double('repository', create: book) }
+  let(:repository) { double('BookRepository', create: book) }
   # RepositoryのモックオブジェクトをInteractorにスタブする
   let(:interactor) { BookInteractor::AddBook.new(repository) }
   # スタブしたInteractorをControllerにDI

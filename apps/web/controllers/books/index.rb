@@ -16,7 +16,7 @@ module Web::Controllers::Books
       # オブジェクト化してUseCase Interactorに渡す。
 
       # アプリケーション固有のビジネスロジックはUseCaseInteractorに委譲
-      @books = interactor.call(params)
+      @books = interactor.call
     end
   end
 end
