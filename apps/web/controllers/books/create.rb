@@ -4,7 +4,7 @@ module Web::Controllers::Books
 
     attr_reader :interactor
 
-    expose :errors
+    expose :book, :errors
 
     def initialize(interactor = BookInteractor::Create.new)
       @interactor = interactor

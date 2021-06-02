@@ -1,20 +1,35 @@
 RSpec.describe Web::Controllers::Books::Create, type: :action do
-  let(:action) { described_class.new }
-  let(:repository) { BookRepository.new }
+  # フェイクオブジェクトを生成
+  let(:book) { Book.new(title: 'Confident Ruby', author: 'Avdi Grimm')}
+  # Repositoryのモックオブジェクトを生成
+  let(:repository) { double('repository', create: book) }
+  # RepositoryのモックオブジェクトをInteractorにスタブする
+  let(:interactor) { BookInteractor::Create.new(repository) }
+  # スタブしたInteractorをControllerにDI
+  let(:action) { described_class.new(interactor) }
 
-  before do
-    repository.clear
-  end
+  # let(:action) { described_class.new }
+  # let(:repository) { BookRepository.new }
+
+  # before do
+  #   repository.clear
+  # end
 
   context 'with valid params' do
     let(:params) { Hash[book: { title: 'Confident Ruby', author: 'Avdi Grimm' }] }
 
     it 'create a book' do
-      action.call(params)
-      book = repository.last
+      # DBをバイパスせずに行う場合のテストコード
+      # action.call(params)
+      # book = repository.last
   
-      expect(book.id).to_not be_nil
-      expect(book.title).to eq(params.dig(:book, :title))
+      # expect(book.id).to_not be_nil
+      # expect(book.title).to eq(params.dig(:book, :title))
+
+      # DBをバイパスする場合のテストコード
+      response = action.call(params)
+      expect(action.book).to eq book
+      expect(action.exposures[:book]).to eq book
     end
   
     it 'redirect the user to the books listing' do
@@ -33,6 +48,7 @@ RSpec.describe Web::Controllers::Books::Create, type: :action do
 
       # mass assignment 対策が有効かどうか
       expect(response[0]).to eq(422)
+      expect(action.errors).not_to be_nil
     end
   end
 end
