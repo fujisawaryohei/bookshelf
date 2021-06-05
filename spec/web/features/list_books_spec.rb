@@ -6,8 +6,8 @@ RSpec.describe 'List books' do
   before do
     repository.clear
     
-    repository.create(title: 'PoEAA', author: 'Martin Fowler')
-    repository.create(title: 'TDD', author: 'Kent Beck')
+    repository.create(title: 'PoEAA', author: 'Martin Fowler', unit_price: 4000)
+    repository.create(title: 'TDD', author: 'Kent Beck', unit_price: 3000)
   end
 
   it 'dispaly each book on page' do

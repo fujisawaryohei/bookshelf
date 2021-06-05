@@ -11,6 +11,7 @@ RSpec.describe 'Add a book' do
     within 'form#book-form' do
       fill_in 'Title', with: 'Example book'
       fill_in 'Author', with: 'Some author'
+      fill_in 'Unit price', with: 2000
 
       click_button 'Create'
     end
