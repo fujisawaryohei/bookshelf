@@ -3,7 +3,7 @@ module Web::Views::Books
     include Web::View
 
     def total_price(book)
-      book.total_price.round
+      "税込価格: #{book.total_price.round}円"
     end
   end
 end
