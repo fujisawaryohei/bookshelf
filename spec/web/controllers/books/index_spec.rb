@@ -1,7 +1,12 @@
 RSpec.describe Web::Controllers::Books::Index, type: :action do
   let(:params) { Hash[] }
   # フェイクオブジェクトの生成
-  let(:books) { [Book.new(title: 'TDD', author: 'Kent Beck'), Book.new(title: 'Confident Ruby', author: 'Avdi Grimm')] }
+  let(:books) { 
+    [ 
+      Book.new(title: 'TDD', author: 'Kent Beck', unit_price: 3500, total_price: 3500 * 1.08 ),
+      Book.new(title: 'Confident Ruby', author: 'Avdi Grimm', unit_price: 3500, total_price: 3500 * 1.08 )
+    ]
+  }
   # Repositoryのモックオブジェクトを生成
   let(:repository) { double('repository', all: books) }
   # RepositoryのモックオブジェクトをInteractにスタブする

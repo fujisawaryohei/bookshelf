@@ -1,7 +1,9 @@
 # spec/web/views/books/index_spec.rb
 
 RSpec.describe Web::Views::Books::Index do
-  let(:exposures) { Hash[books: []] }
+  let(:book1)     { Book.new(title: 'Refactoring', author: 'Martin Fowler', price: 3500) }
+  let(:book2)     { Book.new(title: 'Domain Driven Design', author: 'Eric Evans', price: 4500) }
+  let(:exposures) { Hash[books: [book1, book2]] }
   let(:template)  { Hanami::View::Template.new('apps/web/templates/books/index.html.erb') }
   let(:view)      { described_class.new(template, exposures) }
   let(:rendered)  { view.render }
@@ -17,9 +19,6 @@ RSpec.describe Web::Views::Books::Index do
   end
 
   context 'when there are books' do
-    let(:book1)     { Book.new(title: 'Refactoring', author: 'Martin Fowler') }
-    let(:book2)     { Book.new(title: 'Domain Driven Design', author: 'Eric Evans') }
-    let(:exposures) { Hash[books: [book1, book2]] }
 
     it 'lists them all' do
       expect(rendered.scan(/class="book"/).length).to eq(2)
