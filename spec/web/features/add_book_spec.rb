@@ -32,5 +32,6 @@ RSpec.describe 'Add a book' do
     expect(page).to have_content('There was a problem with your submission')
     expect(page).to have_content('title must be filled')
     expect(page).to have_content('author must be filled')
+    expect(page).to have_content('unit_price must be filled')
   end
 end

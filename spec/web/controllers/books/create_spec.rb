@@ -1,6 +1,6 @@
 RSpec.describe Web::Controllers::Books::Create, type: :action do
   # フェイクオブジェクトを生成
-  let(:book) { Book.new(title: 'Confident Ruby', author: 'Avdi Grimm', unit_price: 3500) }
+  let(:book) { Book.new(title: 'Confident Ruby', author: 'Avdi Grimm', unit_price: '3500') }
   # Repositoryのモックオブジェクトを生成
   let(:repository) { double('BookRepository', create: book) }
   # RepositoryのモックオブジェクトをInteractorにスタブする
@@ -16,7 +16,7 @@ RSpec.describe Web::Controllers::Books::Create, type: :action do
   # end
 
   context 'with valid params' do
-    let(:params) { Hash[book: { title: 'Confident Ruby', author: 'Avdi Grimm', unit_price: 3500 }] }
+    let(:params) { Hash[book: { title: 'Confident Ruby', author: 'Avdi Grimm', unit_price: '3500' }] }
 
     it 'create a book' do
       # DBをバイパスせずに行う場合のテストコード
@@ -30,7 +30,7 @@ RSpec.describe Web::Controllers::Books::Create, type: :action do
       response = action.call(params)
       expect(action.book.title).to eq params[:book][:title]
       expect(action.book.author).to eq params[:book][:author]
-      expect(action.book.unit_price).to eq params[:book][:unit_price]
+      expect(action.book.unit_price).to eq params[:book][:unit_price].to_i
       expect(action.exposures[:book]).to eq Book.new(params[:book])
     end
   

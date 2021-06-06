@@ -10,6 +10,7 @@ module BookInteractor::Validations
       # 文字列が入力されている事を検証　
       required(:title).filled(:str?)
       required(:author).filled(:str?)
+      required(:unit_price).filled(:int?)
     end
   end
 end

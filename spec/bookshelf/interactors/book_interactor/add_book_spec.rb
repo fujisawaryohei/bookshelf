@@ -4,7 +4,7 @@ RSpec.describe BookInteractor::AddBook, type: :interactor do
   let(:interactor) { described_class.new(repository) }
   
   context 'with valid params' do
-    let(:params) {Hash[ { title: 'TDD', author: 'Kent Beck', unit_price: 3500 } ]}
+    let(:params) { Hash[ { title: 'TDD', author: 'Kent Beck', unit_price: 3500 } ]}
     it 'create a book' do
       interactor_result = interactor.call(params)
       expect(interactor_result.book.title).to eq params[:title]
@@ -25,7 +25,7 @@ RSpec.describe BookInteractor::AddBook, type: :interactor do
   end
 
   context 'with invalid params' do
-    let(:params) { Hash[title: '', author: '']}
+    let(:params) { Hash[title: '', author: '', unit_price: -1]}
     it 'create a book' do
       interactor_result = interactor.call(params)
       expect(interactor_result.error_messages).not_to be_nil

@@ -3,6 +3,8 @@ module Web::Controllers::Books
     include Web::Action
 
     attr_reader :interactor
+    
+    before { |params| cast_unit_price(params) }
 
     expose :book, :errors
 
@@ -19,6 +21,14 @@ module Web::Controllers::Books
         @errors = interactor_result.error_messages
         self.status = 422
       end
+    end
+
+    private
+
+    def cast_unit_price(params)
+      return unless params[:book].key?(:unit_price)
+      unit_price = params[:book][:unit_price]
+      params[:book][:unit_price] = unit_price.to_i unless unit_price.empty?
     end
   end
 end
