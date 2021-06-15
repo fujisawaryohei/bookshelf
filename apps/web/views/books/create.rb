@@ -5,11 +5,16 @@ module Web::Views::Books
 
     def error_messages
       error_messages = []
-      errors.each do |key, value|
-        msg = "#{key} #{value[0]}"
-        error_messages.push(msg)
+      errors.each do |error|
+        error_messages = error.map{|k, v| error_format(k, v) }
       end
       error_messages
+    end
+
+    private
+
+    def error_format(key, values)
+      "#{key} #{values.join(",")}"
     end
   end
 end

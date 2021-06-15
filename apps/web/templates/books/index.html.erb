@@ -2,11 +2,11 @@
 
 <% if books.any? %>
   <div id="books">
-    <% books.each do |book| %>
+    <% books.each do |book_presenter| %>
       <div class="book">
-        <h2><%= book.title %></h2>
-        <p><%= book.author %></p>
-        <p><%= total_price(book) %></p>
+        <h2><%= book_presenter.title %></h2>
+        <p><%= book_presenter.author %></p>
+        <p><%= book_presenter.total_price %></p>
       </div>
     <% end %>
   </div>

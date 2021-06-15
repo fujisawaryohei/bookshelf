@@ -28,9 +28,9 @@ RSpec.describe BookInteractor::AddBook, type: :interactor do
     let(:params) { Hash[title: '', author: '', unit_price: -1]}
     it 'create a book' do
       interactor_result = interactor.call(params)
-      expect(interactor_result.error_messages).not_to be_nil
-      expect(interactor_result.error_messages[:title]).to eq ["must be filled"]
-      expect(interactor_result.error_messages[:author]).to eq ["must be filled"]
+      expect(interactor_result.errors.first).not_to be_nil
+      expect(interactor_result.errors.first[:title]).to eq ["must be filled"]
+      expect(interactor_result.errors.first[:author]).to eq ["must be filled"]
     end
   end
 end
